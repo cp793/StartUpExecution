@@ -1,0 +1,176 @@
+      /* css reset */
+      * {
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+      }
+      body {
+        background-color: white;
+      }
+      /* side bar  */
+       .sidebar {
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100dvh;
+        width: 300px;
+        z-index: 999;
+        list-style: none;
+        background-color: white;
+         border-top-left-radius: 8px;
+        display: none;
+        flex-direction: column;
+        align-items:flex-start ;
+        justify-content: flex-start;
+      }
+
+      .sidebar li {
+        height:50px;
+        width: 100%;
+
+      }
+      .sidebar a {
+        font-weight:bold;
+        font-size: 18px;
+        height: 100%;
+        padding: 0 30px;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+         color: #838282;
+        transition: all 10ms ease-out;
+      }
+      .sidebar li a:hover {
+         color: rgb(0, 0, 0);
+      }
+      /* navigation bar: list styling */
+      nav {
+        position: sticky;
+        top: 0;
+        box-shadow: 1.5px 1px 40px 0.1px rgba(0, 0, 0, 0.535);
+        z-index: 10;
+      }
+      .navigationBar {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        list-style: none;
+        min-width: 100%;
+        min-height: 68px;
+        /* filter:blur(5px); */
+        background: transparent;
+        backdrop-filter: blur(95px);
+      }
+      .navigationBar li a {
+        font-size: 18px;
+        text-decoration: none;
+      }
+      #search {
+        border-radius: 10px;
+        padding-left: 12px;
+        background: transparent;
+        color: rgb(0, 0, 0);
+        font-size: 18px;
+        border: none;
+        outline: none;
+        min-height: 25px;
+        max-width: 515px;
+        transition: all 60ms ease-in-out;
+      }
+       #search:hover  {
+        box-shadow: 2.5px 2px 40px 0.1px rgba(0, 0, 0, 0.81);
+        transform: scale(1.1);
+      }
+      #search::placeholder{
+        font-size: auto;
+        color:rgba(0, 0, 0, 0.5);
+      }
+      /* Logos icons */
+      #logo1 img {
+        width: 38px;
+        object-fit: cover;
+        border-radius: 50%;
+        overflow: hidden;
+        cursor: pointer;
+      }
+      i {
+        border-radius: 100%;
+        color: rgb(0, 0, 0);
+      }
+      /* Home section */
+      #container1 {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px;
+        /* border: 1px solid red; */
+        margin: 10px;
+        /* background-color: black; */
+      }
+      .panel {
+        background-color: rgb(231, 238, 247);
+        /* border: 1px solid red; */
+        border-radius: 10px;
+        width: 290px;
+        height: 250px;
+        transition: all 650ms ease-out;
+      }
+      .panel:hover {
+        box-shadow: 1.5px 1px 25px 0.01px rgba(0, 0, 0, 0.8);
+        transform: scale(1.001);
+        cursor: pointer;
+      }
+      #panel1 {
+        background: url(displayimgs/displayimg1.jpg) no-repeat center/cover;
+      }
+      #panel2 {
+        background: url(displayimgs/displayimg2.jpg) no-repeat center/cover;
+      }
+      #panel3 {
+        background: url(displayimgs/displayimg3.jpg) no-repeat center/cover;
+      }
+      #panel4 {
+        background: url(displayimgs/displayimg4.jpg) no-repeat center/cover;
+      }
+      #panel5 {
+        background: url(displayimgs/displayimg5.jpg) no-repeat center/cover;
+      }
+
+
+
+      @media (min-width: 100px) and (max-width: 480px) {
+        .navigationBar li a {
+          width: 100%;
+          font-size: 18px;
+        }
+
+        #search {
+          font-size:12px;
+          min-width: 30px;
+          min-height: 15px;
+        }
+        #logo1 img {
+          width: 26px;
+        }
+      }
+        
+      @media (min-width: 481px) and (max-width: 770px) {
+        .navigationBar li a {
+          font-size: 16px;
+        }
+        
+        #search {
+          font-size:12px;
+          min-height: 26px;
+          min-width: 200px;
+        }
+      }
+      @media (min-width: 771px) and (max-width: 1440px) {
+        .navigationBar li a {
+          font-size: 20px;
+        }
+        #search {
+          min-height: 28px;
+          min-width: 240px;
+        }
+      }
