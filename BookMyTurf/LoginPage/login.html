@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Turf Booking - OTP Login</title>
+  <link rel="stylesheet" href="loginCss.css" />
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Turf Booking</h1>
+    <p>Login with your name and phone number</p>
+
+    <div class="form-group">
+      <input type="text" id="name" placeholder="Enter your name" />
+    </div>
+
+    <div class="form-group">
+      <input type="text" id="phone" placeholder="+91XXXXXXXXXX" />
+      <div id="recaptcha-container"></div>
+      <button onclick="sendOTP()">Send OTP</button>
+    </div>
+
+    <div class="form-group">
+      <input type="text" id="otp" placeholder="Enter OTP" />
+      <button onclick="verifyOTP()">Verify OTP</button>
+    </div>
+
+    <p class="status" id="status"></p>
+  </div>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyBBtls8iDd6n2sAtFqL0JRv84r7Af7CmKw",
+      authDomain: "turf-booking-55873.firebaseapp.com",
+      projectId: "turf-booking-55873",
+      storageBucket: "turf-booking-55873.appspot.com",
+      messagingSenderId: "931411332125",
+      appId: "1:931411332125:web:efa27caeb5b5b50de28af4"
+    };
+    firebase.initializeApp(firebaseConfig);
+
+    window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
+      'size': 'normal',
+      'callback': function (response) {
+        document.getElementById('status').innerText = "reCAPTCHA verified.";
+      }
+    });
+
+    function sendOTP() {
+      const phone = document.getElementById("phone").value;
+      const appVerifier = window.recaptchaVerifier;
+
+      if (!phone) {
+        document.getElementById("status").innerText = "Please enter your phone number.";
+        return;
+      }
+
+      firebase.auth().signInWithPhoneNumber(phone, appVerifier)
+        .then((confirmationResult) => {
+          window.confirmationResult = confirmationResult;
+          document.getElementById("status").innerText = "OTP sent successfully!";
+        })
+        .catch((error) => {
+          document.getElementById("status").innerText = error.message;
+        });
+    }
+
+    function verifyOTP() {
+      const code = document.getElementById("otp").value;
+      const name = document.getElementById("name").value;
+
+      if (!name) {
+        document.getElementById("status").innerText = "Please enter your name.";
+        return;
+      }
+
+      confirmationResult.confirm(code).then((result) => {
+        const user = result.user;
+        document.getElementById("status").innerText = `Welcome, ${name}! Verified: ${user.phoneNumber}`;
+        // You can store user info in Firestore or redirect from here
+      }).catch((error) => {
+        document.getElementById("status").innerText = "Invalid OTP. Try again.";
+      });
+    }
+  </script>
+</body>
+</html>
